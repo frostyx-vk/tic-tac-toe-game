@@ -4,7 +4,7 @@
 }
 
 .head {
-    height: 50px;
+    height: 30px;
 }
 
 .mainpage {
@@ -14,11 +14,23 @@
 .background {
     background-color: #04819E;
 }
+.mainbutton {
+    display: flex;
+    margin-bottom: 5px;
+    justify-content: space-evenly;
+}
 
-.start {
+.nameplayers {
+    display: flex;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    justify-content: space-evenly;
+}
+
+/* .start {
     text-align: center;
     margin-bottom: 5px;
-}
+} */
 
 .button__start {
     background-color: white;

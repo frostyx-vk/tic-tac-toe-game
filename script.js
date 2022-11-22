@@ -70,3 +70,13 @@ function refreshPage() {
     render();
 }
 
+//кнопка выбора игрока
+function select(){
+    let player1 = prompt("Enter player name 1:")
+    let player2 = prompt("Enter player name 2:")
+    let text1 = document.querySelector(`.nameplayers__1`);
+    let text2 = document.querySelector(`.nameplayers__2`);
+    text1.innerHTML = player1;
+    text2.innerHTML = player2;
+  }
+
