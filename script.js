@@ -1,7 +1,7 @@
 `use strict`
 
 // сделана закраска блоков
-const blockForMouse = document.querySelector('.square'); 
+const blockForMouse = document.querySelector('.square');
 blockForMouse.addEventListener(`mouseover`, function (event) {
     let target = event.target.closest(".square_1, .square_2, .square_3, .square_4, .square_5, .square_6, .square_7, .square_8, .square_9");
     if (!target) return;
@@ -28,7 +28,7 @@ function deepCopyArray(array) {
 }
 
 // сделана синхронизация массива и дивов
-function render() {    
+function render() {
     const cells = blockForMouse.querySelectorAll('[data-x][data-y]');
 
     console.log(111, cells);
@@ -44,8 +44,7 @@ function render() {
 
 render();
 
-// условие проставления данных
-let prevValue = 'o';     
+let nextValue;
 
 blockForMouse.addEventListener('click', (e) => {
     const x = +e.target.dataset['x'];
@@ -53,30 +52,47 @@ blockForMouse.addEventListener('click', (e) => {
 
     if (gameState[x][y] !== null) return;
 
-    if (prevValue === 'o') {
-        prevValue = 'x';
-    } else {
-        prevValue = 'o';
-    }
+    gameState[x][y] = nextValue;
 
-    gameState[x][y] = prevValue;
+    if (nextValue === 'o') {
+        nextValue = 'x';
+    } else {
+        nextValue = 'o';
+    }
 
     render();
 })
 
-// на кнопку рестарт навешанo действие приведения в дефоолтному состоянию поля игры
+//кнопка выбора игрока
+
+
+function handleButton(buttonElement) {
+    if (nextValue) return;
+
+    nextValue = buttonElement.dataset['value'];
+
+    const firstPlayerName = prompt("Enter player name 1:")
+    const firstPlayerTextElem = document.querySelector(`.nameplayers__${nextValue}`);
+
+    if (firstPlayerTextElem) {
+        firstPlayerTextElem.innerHTML = firstPlayerName;
+    }
+
+
+    const secondUserSign = nextValue === 'x' ? 'o' : 'x';
+    const secondPlayerName = prompt("Enter player name 2:")
+    const secondPlayerTextElem = document.querySelector(`.nameplayers__${secondUserSign}`);
+
+    if (secondPlayerTextElem) {
+        secondPlayerTextElem.innerHTML = secondPlayerName;
+    }
+}
+
+
+// на кнопку рестарт навешанo действие приведения в дефолтному состоянию поля игры
 function refreshPage() {
     gameState = deepCopyArray(defaultGameState);
     render();
 }
 
-//кнопка выбора игрока
-function select(){
-    let player1 = prompt("Enter player name 1:")
-    let player2 = prompt("Enter player name 2:")
-    let text1 = document.querySelector(`.nameplayers__1`);
-    let text2 = document.querySelector(`.nameplayers__2`);
-    text1.innerHTML = player1;
-    text2.innerHTML = player2;
-  }
 
