@@ -1,6 +1,7 @@
 `use strict`
 
-const blockForMouse = document.querySelector('.square');
+// сделана закраска блоков
+const blockForMouse = document.querySelector('.square'); 
 blockForMouse.addEventListener(`mouseover`, function (event) {
     let target = event.target.closest(".square_1, .square_2, .square_3, .square_4, .square_5, .square_6, .square_7, .square_8, .square_9");
     if (!target) return;
@@ -12,14 +13,22 @@ blockForMouse.addEventListener(`mouseout`, function (event) {
     target.style.cssText = ``;
 });
 
-
-const block = [
+const defaultGameState = [
     [null, null, null],
     [null, null, null],
     [null, null, null],
 ]
 
-function render() {
+// создан массив по аналогии поля 3 на 3
+let gameState = deepCopyArray(defaultGameState);
+
+// преведен массив к строке и из строки получен новый массив без ссылок
+function deepCopyArray(array) {
+    return JSON.parse(JSON.stringify(array))
+}
+
+// сделана синхронизация массива и дивов
+function render() {    
     const cells = blockForMouse.querySelectorAll('[data-x][data-y]');
 
     console.log(111, cells);
@@ -27,7 +36,7 @@ function render() {
     for (const cell of cells) {
         const x = +cell.dataset['x']; // 0
         const y = +cell.dataset['y']; // 0
-        const value = block[x][y]; // block[0][0] 
+        const value = gameState[x][y]; // block[0][0] 
 
         cell.innerHTML = value;
     }
@@ -35,22 +44,14 @@ function render() {
 
 render();
 
-
-// for (let i = 0; i < block.length, i++) {
-//     let blockIn = block[i] 
-//     for (let k = 0; k < blockIn.length; i++)
-//     console.log(blockIn[blockIn])
-// }
-
-
-
-let prevValue = 'o';
+// условие проставления данных
+let prevValue = 'o';     
 
 blockForMouse.addEventListener('click', (e) => {
     const x = +e.target.dataset['x'];
     const y = +e.target.dataset['y'];
 
-    if (block[x][y] !== null) return;
+    if (gameState[x][y] !== null) return;
 
     if (prevValue === 'o') {
         prevValue = 'x';
@@ -58,15 +59,14 @@ blockForMouse.addEventListener('click', (e) => {
         prevValue = 'o';
     }
 
-    block[x][y] = prevValue;
+    gameState[x][y] = prevValue;
 
     render();
 })
 
+// на кнопку рестарт навешанo действие приведения в дефоолтному состоянию поля игры
+function refreshPage() {
+    gameState = deepCopyArray(defaultGameState);
+    render();
+}
 
-
-
-// const myClick = document.querySelector('.square_1');
-// myClick.onclick = function() {
-//     prompt('X или 0 ?');
-//   };
