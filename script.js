@@ -1,5 +1,8 @@
 `use strict`
 
+let nextValue;
+
+
 // сделана закраска блоков
 const blockForMouse = document.querySelector('.square');
 blockForMouse.addEventListener(`mouseover`, function (event) {
@@ -22,7 +25,7 @@ const defaultGameState = [
 // создан массив по аналогии поля 3 на 3
 let gameState = deepCopyArray(defaultGameState);
 
-// преведен массив к строке и из строки получен новый массив без ссылок
+// приведен массив к строке и из строки получен новый массив без ссылок
 function deepCopyArray(array) {
     return JSON.parse(JSON.stringify(array))
 }
@@ -30,8 +33,21 @@ function deepCopyArray(array) {
 // сделана синхронизация массива и дивов
 function render() {
     const cells = blockForMouse.querySelectorAll('[data-x][data-y]');
+    const buttonsArray = document.querySelectorAll(`.mainbutton button.button__start`);
 
-    console.log(111, cells);
+    for (const button of buttonsArray) {
+        const value = button.dataset["value"]; 
+
+        if (nextValue === value) {
+            button.classList.add('button__active');
+        } else {
+            button.classList.remove('button__active');
+        }
+    }
+
+    console.log(buttonsArray);
+
+    // console.log(111, cells);
 
     for (const cell of cells) {
         const x = +cell.dataset['x']; // 0
@@ -44,7 +60,6 @@ function render() {
 
 render();
 
-let nextValue;
 
 blockForMouse.addEventListener('click', (e) => {
     const x = +e.target.dataset['x'];
@@ -78,8 +93,8 @@ function handleButton(buttonElement) {
         firstPlayerTextElem.innerHTML = firstPlayerName;
     }
 
-
     const secondUserSign = nextValue === 'x' ? 'o' : 'x';
+
     const secondPlayerName = prompt("Enter player name 2:")
     const secondPlayerTextElem = document.querySelector(`.nameplayers__${secondUserSign}`);
 
@@ -88,11 +103,8 @@ function handleButton(buttonElement) {
     }
 }
 
-
 // на кнопку рестарт навешанo действие приведения в дефолтному состоянию поля игры
 function refreshPage() {
     gameState = deepCopyArray(defaultGameState);
     render();
 }
-
-

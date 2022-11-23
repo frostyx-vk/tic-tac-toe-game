@@ -49,6 +49,10 @@
     border-bottom: 2px solid #63b88b;
 }
 
+.button__active {
+    border-bottom: 2px solid #63b88b;
+}
+
 .container {
     width: 1000px;
     height: 550px;
