@@ -30,13 +30,13 @@ function deepCopyArray(array) {
     return JSON.parse(JSON.stringify(array))
 }
 
-// сделана синхронизация массива и дивов
+// сделана синхронизация массива и дивов, подключение кнопок
 function render() {
     const cells = blockForMouse.querySelectorAll('[data-x][data-y]');
     const buttonsArray = document.querySelectorAll(`.mainbutton button.button__start`);
 
     for (const button of buttonsArray) {
-        const value = button.dataset["value"]; 
+        const value = button.dataset["value"];
 
         if (nextValue === value) {
             button.classList.add('button__active');
@@ -46,8 +46,6 @@ function render() {
     }
 
     console.log(buttonsArray);
-
-    // console.log(111, cells);
 
     for (const cell of cells) {
         const x = +cell.dataset['x']; // 0
@@ -60,6 +58,7 @@ function render() {
 
 render();
 
+//условие при котором создана последовательность нажатия 'x' и 'o'
 
 blockForMouse.addEventListener('click', (e) => {
     const x = +e.target.dataset['x'];
@@ -101,9 +100,17 @@ function handleButton(buttonElement) {
     if (secondPlayerTextElem) {
         secondPlayerTextElem.innerHTML = secondPlayerName;
     }
+    
+// показывает div с блоком игровой зоны
+    let gameAreaElement = document.getElementById('gameArea');
+    const style = window.getComputedStyle(gameAreaElement);
+    if (style.display === 'none') {
+        gameAreaElement.style.display = 'block';
+    }
+
 }
 
-// на кнопку рестарт навешанo действие приведения в дефолтному состоянию поля игры
+// Сбрасывает игровое поле перед началом новой игры
 function refreshPage() {
     gameState = deepCopyArray(defaultGameState);
     render();
