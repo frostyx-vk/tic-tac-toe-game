@@ -2,6 +2,26 @@
 
 let nextValue;
 
+const winCombinations = [
+    ["00", "01", "02"],
+    ["10", "11", "12"],
+    ["20", "21", "22"],
+    ["00", "10", "20"],
+    ["01", "11", "21"],
+    ["02", "12", "22"],
+    ["00", "11", "22"],
+    ["20", "11", "02"],
+];
+
+const defaultGameState = [
+    [null, null, null],
+    [null, null, null],
+    [null, null, null],
+];
+
+// создан массив по аналогии поля 3 на 3
+let gameState = deepCopyArray(defaultGameState);
+
 
 // сделана закраска блоков
 const blockForMouse = document.querySelector('.square');
@@ -15,15 +35,6 @@ blockForMouse.addEventListener(`mouseout`, function (event) {
     if (!target) return;
     target.style.cssText = ``;
 });
-
-const defaultGameState = [
-    [null, null, null],
-    [null, null, null],
-    [null, null, null],
-]
-
-// создан массив по аналогии поля 3 на 3
-let gameState = deepCopyArray(defaultGameState);
 
 // приведен массив к строке и из строки получен новый массив без ссылок
 function deepCopyArray(array) {
@@ -58,13 +69,49 @@ function render() {
 
 render();
 
-//условие при котором создана последовательность нажатия 'x' и 'o'
+// правило при котором игра заканчивается победителем
+function checkWin() {
+    const flatGameState = gameState.flat();
 
+    const foundCellValue = flatGameState.find(function (item) {
+        return item === null
+    });
+
+    if (foundCellValue !== null) {
+        alert('Ничья!');
+        refreshPage();
+        return;
+    }
+
+    for (const combinations of winCombinations) {
+
+        const line = combinations.map(combination => {
+            const [fistIndex, secondIndex] = combination.split('');
+            return gameState[fistIndex][secondIndex];
+        }).join('');
+
+        if (line === 'xxx') {
+            alert('win X');
+            refreshPage();
+            break;
+        } else if (line === 'ooo') {
+            alert('win O');
+            refreshPage();
+            break;
+        } 
+    }
+}
+
+//условие при котором создана последовательность нажатия 'x' и 'o'
 blockForMouse.addEventListener('click', (e) => {
     const x = +e.target.dataset['x'];
     const y = +e.target.dataset['y'];
 
-    if (gameState[x][y] !== null) return;
+    if (
+        Number.isNaN(x) ||
+        Number.isNaN(y) ||
+        gameState[x][y] !== null
+    ) return;
 
     gameState[x][y] = nextValue;
 
@@ -75,11 +122,11 @@ blockForMouse.addEventListener('click', (e) => {
     }
 
     render();
+
+    checkWin();
 })
 
 //кнопка выбора игрока
-
-
 function handleButton(buttonElement) {
     if (nextValue) return;
 
@@ -100,8 +147,8 @@ function handleButton(buttonElement) {
     if (secondPlayerTextElem) {
         secondPlayerTextElem.innerHTML = secondPlayerName;
     }
-    
-// показывает div с блоком игровой зоны
+
+    // показывает div с блоком игровой зоны
     let gameAreaElement = document.getElementById('gameArea');
     const style = window.getComputedStyle(gameAreaElement);
     if (style.display === 'none') {
@@ -115,3 +162,4 @@ function refreshPage() {
     gameState = deepCopyArray(defaultGameState);
     render();
 }
+
