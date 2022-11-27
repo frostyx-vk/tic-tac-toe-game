@@ -22,7 +22,6 @@ const defaultGameState = [
 // создан массив по аналогии поля 3 на 3
 let gameState = deepCopyArray(defaultGameState);
 
-
 // сделана закраска блоков
 const blockForMouse = document.querySelector('.square');
 blockForMouse.addEventListener(`mouseover`, function (event) {
@@ -162,4 +161,3 @@ function refreshPage() {
     gameState = deepCopyArray(defaultGameState);
     render();
 }
-
