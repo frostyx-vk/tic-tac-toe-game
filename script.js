@@ -27,7 +27,7 @@ const blockForMouse = document.querySelector('.square');
 blockForMouse.addEventListener(`mouseover`, function (event) {
     let target = event.target.closest(".square_1, .square_2, .square_3, .square_4, .square_5, .square_6, .square_7, .square_8, .square_9");
     if (!target) return;
-    target.style.cssText = `background-color: #6348cf;`;
+    target.style.cssText = `background-color: #2a915f;`;
 });
 blockForMouse.addEventListener(`mouseout`, function (event) {
     let target = event.target.closest(".square_1, .square_2, .square_3, .square_4, .square_5, .square_6, .square_7, .square_8, .square_9");
@@ -62,7 +62,7 @@ function render() {
         const y = +cell.dataset['y']; // 0
         const value = gameState[x][y]; // block[0][0] 
 
-        cell.innerHTML = value;
+        cell.innerHTML = '<div class="x">x</div>';
     }
 }
 
