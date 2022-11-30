@@ -62,7 +62,7 @@ function render() {
         const y = +cell.dataset['y']; // 0
         const value = gameState[x][y]; // block[0][0] 
 
-        cell.innerHTML = '<div class="x">x</div>';
+        cell.innerHTML = value;
     }
 }
 

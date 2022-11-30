@@ -7,11 +7,9 @@
     height: 30px;
 }
 
-.mainpage {
+.mainpage {}
 
-}
-
-.x {
+/* .x {
     font-size: 40px;
     font-weight: bold;
     color: #000;
@@ -21,11 +19,12 @@
 .o {
     content: ' \25CF';
     font-size: 200px;
-}
+} */
 
 .background {
     background-color: #4dab7d;
 }
+
 .mainbutton {
     display: flex;
     margin-bottom: 5px;
@@ -43,7 +42,7 @@
     background-color: white;
     border: none;
     border-radius: 10px;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5); 
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5);
     color: black;
     padding: 10px 80px;
     text-align: center;
@@ -62,8 +61,11 @@
 
 .container {
     width: 1000px;
-    height: 550px;
+    height: 450px;
     margin: 0 auto;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
 }
 
 .square {
@@ -73,15 +75,32 @@
     height: 500px;
     display: none;
 }
+
 .square_line1 {
     display: flex;
     justify-content: center;
 }
+
+.square_1,
+.square_2,
+.square_3,
+.square_4,
+.square_5,
+.square_6,
+.square_7,
+.square_8,
+.square_9 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .square_1 {
     width: 100px;
     height: 100px;
     border-bottom: 5px solid #459970;
 }
+
 .square_2 {
     width: 100px;
     height: 100px;
@@ -89,20 +108,24 @@
     border-right: 5px solid #459970;
     border-bottom: 5px solid #459970;
 }
+
 .square_3 {
     width: 100px;
     height: 100px;
     border-bottom: 5px solid #459970;
 }
+
 .square_line2 {
     display: flex;
     justify-content: center;
 }
+
 .square_4 {
     width: 100px;
     height: 100px;
     border-bottom: 5px solid #459970;
 }
+
 .square_5 {
     width: 100px;
     height: 100px;
@@ -110,25 +133,30 @@
     border-right: 5px solid #459970;
     border-bottom: 5px solid #459970;
 }
+
 .square_6 {
     width: 100px;
     height: 100px;
     border-bottom: 5px solid #459970;
 }
+
 .square_line3 {
     display: flex;
     justify-content: center;
 }
+
 .square_7 {
     width: 100px;
     height: 100px;
 }
+
 .square_8 {
     width: 100px;
     height: 100px;
     border-left: 5px solid #459970;
     border-right: 5px solid #459970;
 }
+
 .square_9 {
     width: 100px;
     height: 100px;
@@ -146,4 +174,22 @@
     font-size: 30px;
     padding-top: 10px;
     font-weight: 700;
+}
+
+.symbol_x::after,
+.symbol_o::after {
+    display: block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: auto 30px;
+    height: 30px;
+    width: 30px;
+}
+
+.symbol_x::after {
+    background-image: url("./x.svg");
+}
+
+.symbol_o::after {
+    background-image: url("./o.svg");
 }
