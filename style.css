@@ -3,11 +3,34 @@
     padding: 0;
 }
 
+@media (min-width:993px) and (max-width: 1198px){
+    .container {
+        max-width: 970px;
+    }
+}
+
+@media (min-width: 767px) and (max-width: 992px) {
+    .container {
+        max-width: 750px;
+    }
+}
+
+
+@media (min-width: 415px) and (max-width: 766px) {
+    .container {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 414px){
+    .container {
+        max-width: none;
+    }
+}
+
 .head {
     height: 30px;
 }
-
-.mainpage {}
 
 .background {
     background-color: #4dab7d;
