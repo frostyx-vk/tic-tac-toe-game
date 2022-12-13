@@ -18,11 +18,17 @@
 
 @media (min-width: 415px) and (max-width: 766px) {
     .container {
-        max-width: 90%;
+        max-width: 400px;
     }
 }
 
-@media (max-width: 414px){
+@media (min-width: 360px) and (max-width: 667px) {
+    .container {
+        max-width: 359px;
+    }
+}
+
+@media (max-width: 359px){
     .container {
         max-width: none;
     }
@@ -79,7 +85,7 @@
 .square {
     margin: 0 auto;
     padding-top: 50px;
-    width: 500px;
+    /* width: 500px; */
     height: 500px;
     display: none;
 }
