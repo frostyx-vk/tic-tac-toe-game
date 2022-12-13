@@ -62,7 +62,15 @@ function render() {
         const y = +cell.dataset['y']; // 0
         const value = gameState[x][y]; // block[0][0] 
 
-        cell.innerHTML = value;
+        if (value === 'x') {
+            cell.classList.add('symbol_x');
+        } else if (value === 'o') {
+            cell.classList.add('symbol_o')
+        } else {
+            cell.classList.remove(`symbol_x`,`symbol_o`)
+        };
+
+        // cell.innerHTML = value;
     }
 }
 
@@ -97,7 +105,7 @@ function checkWin() {
             alert('win O');
             refreshPage();
             break;
-        } 
+        }
     }
 }
 
